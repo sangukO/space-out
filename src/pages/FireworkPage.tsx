@@ -7,8 +7,8 @@ interface CanvasProps {
 }
 
 function Firework({
-    width = window.innerWidth - 50,
-    height = window.innerHeight - 50,
+    width = window.innerWidth,
+    height = window.innerHeight,
 }: CanvasProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     type Props = {
@@ -53,19 +53,36 @@ function Firework({
     return (
         <>
             <div
-                className="backgroud firework-background"
-                style={{ color: "white", justifyContent: "center" }}
+                style={{ background: "black", height: "100vh", width: "100vw" }}
             >
-                <Link className="text-link" to={"/"}>
-                    <Emoji symbol="🌏️" label="main" />
-                </Link>
-                <div>
-                    <canvas
-                        ref={canvasRef}
-                        width={width}
-                        height={height}
-                        className="canvas"
-                    />
+                <div
+                    className="backgroud firework-background"
+                    style={{
+                        color: "white",
+                        justifyContent: "center",
+                        background: "black",
+                        position: "relative",
+                    }}
+                >
+                    <Link
+                        className="text-link"
+                        to={"/"}
+                        style={{
+                            position: "absolute",
+                            top: "0px",
+                            left: "0px",
+                        }}
+                    >
+                        <Emoji symbol="🌏️" label="main" />
+                    </Link>
+                    <div className="canvasWrap">
+                        <canvas
+                            ref={canvasRef}
+                            width={width}
+                            height={height}
+                            className="canvas"
+                        />
+                    </div>
                 </div>
             </div>
         </>
