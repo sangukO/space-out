@@ -12,20 +12,17 @@ body {
     left: 50%;
 }
 
-.firework-background {
-    justify-content: center;
-    color: #fff;
-    background-color: #070816;
+.firework-wrap {
+    background-image: url("/src/images/ocean.jpg");
+    filter: brightness(80%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     height: 100%;
     width: 100%;
 }
 
-.canvas {
-    background: #fff;
-    transform: matrix(0.64, 0, 0, 0.64, 0, 0);
-}
-
-.canvasWrap {
-    display: flex;
-    justify-content: center;
+.firework {
+    height: 73%;
+    width: 100%;
 }

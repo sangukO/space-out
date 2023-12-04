@@ -1,16 +1,8 @@
-import { useRef } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Fireworks } from "fireworks-js";
 
-interface CanvasProps {
-    width: number;
-    height: number;
-}
-
-function Firework({
-    width = window.innerWidth,
-    height = window.innerHeight,
-}: CanvasProps) {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
+function Firework() {
     type Props = {
         symbol: string;
         label: string;
@@ -27,62 +19,60 @@ function Firework({
         </span>
     );
 
-    const draw = () => {
-        if (!canvasRef.current) {
-            return;
-        }
-        const canvas: HTMLCanvasElement = canvasRef.current;
-        const context = canvas.getContext("2d");
-        if (!context) {
-            return;
-        }
-        context.beginPath();
-        context.moveTo(150, 150);
-        context.arc(150, 150, 100, 0, (Math.PI / 180) * 90, true);
-        context.closePath();
-        context.stroke();
+    useEffect(() => {
+        const options = {
+            rocketsPoint: {
+                min: 50,
+                max: 50,
+            },
+            intensity: 8,
+            speed: 1,
+            autoresize: true,
+            acceleration: 1.0,
+            traceSpeed: 6,
+            delay: {
+                min: 100,
+                max: 100,
+            },
+            decay: {
+                min: 0.01,
+                max: 0.05,
+            },
+            flickering: 0.0,
+            particles: 150,
+            opacity: 1.0,
+        };
 
-        context.beginPath();
-        context.strokeStyle = "blue";
-        context.moveTo(150, 150);
-        context.arc(150, 150, 100, 0, (Math.PI / 180) * 90, false);
-        context.closePath();
-        context.fill();
-    };
-    draw();
+        const fireworks = new Fireworks(
+            document.querySelector(".firework")!,
+            options
+        );
+        fireworks.start();
+    }, []);
+
     return (
         <>
             <div
-                style={{ background: "black", height: "100vh", width: "100vw" }}
+                style={{
+                    width: "100vw",
+                    height: "100vh",
+                    position: "relative",
+                }}
             >
-                <div
-                    className="backgroud firework-background"
+                <Link
+                    className="text-link"
+                    to={"/"}
                     style={{
-                        color: "white",
-                        justifyContent: "center",
-                        background: "black",
-                        position: "relative",
+                        position: "absolute",
+                        top: "0px",
+                        left: "0px",
+                        zIndex: 99999,
                     }}
                 >
-                    <Link
-                        className="text-link"
-                        to={"/"}
-                        style={{
-                            position: "absolute",
-                            top: "0px",
-                            left: "0px",
-                        }}
-                    >
-                        <Emoji symbol="🌏️" label="main" />
-                    </Link>
-                    <div className="canvasWrap">
-                        <canvas
-                            ref={canvasRef}
-                            width={width}
-                            height={height}
-                            className="canvas"
-                        />
-                    </div>
+                    <Emoji symbol="🌏️" label="main" />
+                </Link>
+                <div className="firework-wrap">
+                    <div className="firework"></div>
                 </div>
             </div>
         </>
