@@ -2,17 +2,26 @@ body {
     margin: 0;
 }
 
-.text-link {
+.Whitespace {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.IconLink {
+    min-width: 50%;
+    display: flex;
+    position: absolute;
+    bottom: 30%;
+    justify-content: space-around;
+}
+
+.TextLink {
     text-decoration: none;
 }
 
-.firework-link {
-    position: fixed;
-    bottom: 30%;
-    left: 50%;
-}
-
-.firework-wrap {
+.FireworkWrap {
     background-image: url("/src/images/ocean.jpg");
     filter: brightness(80%);
     background-repeat: no-repeat;
@@ -22,7 +31,7 @@ body {
     width: 100%;
 }
 
-.firework {
+.Firework {
     height: 73%;
     width: 100%;
 }
