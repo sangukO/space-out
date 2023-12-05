@@ -19,10 +19,15 @@ function App() {
 
     return (
         <>
-            <div className="firework-link">
-                <Link className="text-link" to={"/firework"}>
-                    <Emoji symbol="🎇" label="firework" />
-                </Link>
+            <div className="Whitespace">
+                <div className="IconLink">
+                    <Link className="TextLink" to={"/firework"}>
+                        <Emoji symbol="🎇" label="firework" />
+                    </Link>
+                    <Link className="TextLink" to={"/scroll"}>
+                        <Emoji symbol="🖱️" label="scroll" />
+                    </Link>
+                </div>
             </div>
         </>
     );
