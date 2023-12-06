@@ -16,6 +16,14 @@ function Firework() {
             {symbol}
         </span>
     );
+
+    const names = ["☃️", "🧊", "❄️", "🌈", "🌊"];
+    const nameList = names.map((name) => (
+        <div className="ScrollItem">
+            <Emoji symbol={name} label="main" />
+        </div>
+    ));
+
     return (
         <>
             <div
@@ -37,6 +45,7 @@ function Firework() {
                 >
                     <Emoji symbol="🌏️" label="main" />
                 </Link>
+                <div className="ScrollWrap">{nameList}</div>
             </div>
         </>
     );

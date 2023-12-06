@@ -35,3 +35,20 @@ body {
     height: 73%;
     width: 100%;
 }
+
+.ScrollWrap {
+    width: 20rem;
+    height: 100%;
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ScrollItem {
+    width: 20rem;
+    height: 25rem;
+    background-color: gray;
+    border: 2px solid blue;
+}
