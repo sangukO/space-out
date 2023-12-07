@@ -60,7 +60,7 @@ function Firework() {
                 }}
             >
                 <Link
-                    className="text-link"
+                    className="TextLink"
                     to={"/"}
                     style={{
                         position: "absolute",

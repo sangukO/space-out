@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function Firework() {
@@ -17,24 +18,48 @@ function Firework() {
         </span>
     );
 
-    const names = ["☃️", "🧊", "❄️", "🌈", "🌊"];
-    const nameList = names.map((name) => (
-        <div className="ScrollItem">
-            <Emoji symbol={name} label="main" />
+    const [icons, setIcons] = useState(["☃️", "🧊", "❄️", "🌈", "🌊"]);
+    const [scrollHeight, setScrollHeight] = useState(0);
+
+    const nameList = icons.map((icon, index) => (
+        <div className="ScrollItem" key={index}>
+            <Emoji symbol={icon} label="main" />
         </div>
     ));
+
+    function updateScroll() {
+        setScrollHeight(window.scrollY);
+    }
+
+    function addIcons() {
+        const newIcon = "🎄";
+        setIcons((prevIcons) => [...prevIcons, newIcon]);
+    }
+
+    useEffect(() => {
+        window.addEventListener("scroll", function () {
+            updateScroll();
+        });
+        return () => {
+            window.removeEventListener("scroll", updateScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (scrollHeight === document.body.scrollHeight - window.innerHeight) {
+            addIcons();
+        }
+    }, [scrollHeight]);
 
     return (
         <>
             <div
                 style={{
-                    width: "100vw",
-                    height: "100vh",
                     position: "relative",
                 }}
             >
                 <Link
-                    className="text-link"
+                    className="TextLink"
                     to={"/"}
                     style={{
                         position: "absolute",
