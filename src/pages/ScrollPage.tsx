@@ -1,29 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function Firework() {
-    type Props = {
-        symbol: string;
-        label: string;
-    };
-
-    const Emoji = ({ symbol, label }: Props) => (
-        <span
-            className="emoji"
-            role="img"
-            aria-label={label ? label : ""}
-            aria-hidden={label ? "false" : "true"}
-        >
-            {symbol}
-        </span>
-    );
-
+function Scroll() {
     const [icons, setIcons] = useState(["☃️", "🧊", "❄️", "🌈", "🌊"]);
     const [scrollHeight, setScrollHeight] = useState(0);
 
     const nameList = icons.map((icon, index) => (
         <div className="ScrollItem" key={index}>
-            <Emoji symbol={icon} label="main" />
+            <span role="icon" aria-label={index.toString()}>
+                {icon}
+            </span>
         </div>
     ));
 
@@ -68,7 +54,9 @@ function Firework() {
                         zIndex: 99999,
                     }}
                 >
-                    <Emoji symbol="🌏️" label="main" />
+                    <span role="icon" aria-label="main">
+                        🌏️
+                    </span>
                 </Link>
                 <div className="ScrollWrap">{nameList}</div>
             </div>
@@ -76,4 +64,4 @@ function Firework() {
     );
 }
 
-export default Firework;
+export default Scroll;

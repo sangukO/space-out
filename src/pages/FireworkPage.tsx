@@ -3,22 +3,6 @@ import { Link } from "react-router-dom";
 import { Fireworks } from "fireworks-js";
 
 function Firework() {
-    type Props = {
-        symbol: string;
-        label: string;
-    };
-
-    const Emoji = ({ symbol, label }: Props) => (
-        <span
-            className="emoji"
-            role="img"
-            aria-label={label ? label : ""}
-            aria-hidden={label ? "false" : "true"}
-        >
-            {symbol}
-        </span>
-    );
-
     useEffect(() => {
         const options = {
             rocketsPoint: {
@@ -69,7 +53,9 @@ function Firework() {
                         zIndex: 99999,
                     }}
                 >
-                    <Emoji symbol="🌏️" label="main" />
+                    <span role="icon" aria-label="main">
+                        🌏️
+                    </span>
                 </Link>
                 <div className="FireworkWrap">
                     <div className="Firework"></div>
