@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function Scroll() {
     const [icons, setIcons] = useState(["☃️", "🧊", "❄️", "🌈", "🌊"]);
@@ -23,6 +24,10 @@ function Scroll() {
     }
 
     useEffect(() => {
+        axios.get("https://cataas.com/cat").then(function (response) {
+            setIcons((prevIcons) => [...prevIcons, response.data]);
+        });
+
         window.addEventListener("scroll", function () {
             updateScroll();
         });
