@@ -3,14 +3,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 function Scroll() {
-    const [icons, setIcons] = useState(["☃️", "🧊", "❄️", "🌈", "🌊"]);
+    const [icons, setIcons] = useState([""]);
     const [scrollHeight, setScrollHeight] = useState(0);
 
     const nameList = icons.map((icon, index) => (
         <div className="ScrollItem" key={index}>
-            <span role="icon" aria-label={index.toString()}>
-                {icon}
-            </span>
+            <img src={icon} style={{ width: "100%", height: "100%" }}></img>
         </div>
     ));
 
@@ -18,16 +16,40 @@ function Scroll() {
         setScrollHeight(window.scrollY);
     }
 
-    function addIcons() {
-        const newIcon = "🎄";
-        setIcons((prevIcons) => [...prevIcons, newIcon]);
+    async function fetchFirstData() {
+        const response = await axios.get("https://cataas.com/cat", {
+            responseType: "arraybuffer", // 바이너리 데이터로 받기 위해 responseType 설정
+        });
+        const base64Data = btoa(
+            new Uint8Array(response.data).reduce(
+                (data, byte) => data + String.fromCharCode(byte),
+                ""
+            )
+        );
+        setIcons([`data:image/jpeg;base64,${base64Data}`]);
+    }
+
+    async function fetchData() {
+        const response = await axios.get("https://cataas.com/cat", {
+            responseType: "arraybuffer", // 바이너리 데이터로 받기 위해 responseType 설정
+        });
+        const base64Data = btoa(
+            new Uint8Array(response.data).reduce(
+                (data, byte) => data + String.fromCharCode(byte),
+                ""
+            )
+        );
+        setIcons((prevIcons) => [
+            ...prevIcons,
+            `data:image/jpeg;base64,${base64Data}`,
+        ]);
     }
 
     useEffect(() => {
-        axios.get("https://cataas.com/cat").then(function (response) {
-            setIcons((prevIcons) => [...prevIcons, response.data]);
-        });
-
+        fetchFirstData();
+        fetchData();
+        fetchData();
+        fetchData();
         window.addEventListener("scroll", function () {
             updateScroll();
         });
@@ -38,7 +60,7 @@ function Scroll() {
 
     useEffect(() => {
         if (scrollHeight === document.body.scrollHeight - window.innerHeight) {
-            addIcons();
+            fetchData();
         }
     }, [scrollHeight]);
 
@@ -63,6 +85,9 @@ function Scroll() {
                         🌏️
                     </span>
                 </Link>
+                <div className="ScrollTitle">
+                    <span>Infinite Cats</span>
+                </div>
                 <div className="ScrollWrap">{nameList}</div>
             </div>
         </>

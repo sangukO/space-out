@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap");
+
 body {
     margin: 0;
 }
@@ -53,4 +55,13 @@ body {
     width: 20rem;
     height: 25rem;
     border: 1px solid blue;
+}
+
+.ScrollTitle {
+    display: flex;
+    height: 20vh;
+    justify-content: center;
+    align-items: center;
+    font-family: "Noto Serif", serif;
+    font-size: 48px;
 }
