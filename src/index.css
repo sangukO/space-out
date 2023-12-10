@@ -45,7 +45,6 @@ body {
     justify-content: center;
     display: flex;
     flex-direction: column;
-    gap: 20px;
 }
 
 .ScrollItem {
@@ -55,6 +54,7 @@ body {
     width: 20rem;
     height: 25rem;
     border: 1px solid blue;
+    margin-bottom: 20px;
 }
 
 .ScrollTitle {
