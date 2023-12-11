@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 function Scroll() {
-    const [icons, setIcons] = useState([""]);
+    const [icons, setIcons] = useState([
+        { id: "", url: "", width: Number, height: Number },
+    ]);
     const [scrollHeight, setScrollHeight] = useState(0);
 
     const nameList = icons.map((icon, index) => (
         <div className="ScrollItem" key={index}>
-            <img src={icon} style={{ width: "100%", height: "100%" }}></img>
+            <img src={icon.url} style={{ width: "100%", height: "100%" }}></img>
         </div>
     ));
 
@@ -17,39 +19,25 @@ function Scroll() {
     }
 
     async function fetchFirstData() {
-        const response = await axios.get("https://cataas.com/cat", {
-            responseType: "arraybuffer", // 바이너리 데이터로 받기 위해 responseType 설정
-        });
-        const base64Data = btoa(
-            new Uint8Array(response.data).reduce(
-                (data, byte) => data + String.fromCharCode(byte),
-                ""
-            )
+        const response = await axios.get(
+            "https://api.thecatapi.com/v1/images/search?limit=10"
         );
-        setIcons([`data:image/jpeg;base64,${base64Data}`]);
+        const { data } = response;
+        setIcons(data);
     }
 
     async function fetchData() {
-        const response = await axios.get("https://cataas.com/cat", {
-            responseType: "arraybuffer", // 바이너리 데이터로 받기 위해 responseType 설정
-        });
-        const base64Data = btoa(
-            new Uint8Array(response.data).reduce(
-                (data, byte) => data + String.fromCharCode(byte),
-                ""
-            )
+        const response = await axios.get(
+            "https://api.thecatapi.com/v1/images/search?limit=10"
         );
-        setIcons((prevIcons) => [
-            ...prevIcons,
-            `data:image/jpeg;base64,${base64Data}`,
-        ]);
+        const { data } = response;
+        for (let i = 0; i < data.length; i++) {
+            setIcons((prevIcons) => [...prevIcons, data[i]]);
+        }
     }
 
     useEffect(() => {
         fetchFirstData();
-        fetchData();
-        fetchData();
-        fetchData();
         window.addEventListener("scroll", function () {
             updateScroll();
         });
@@ -60,6 +48,7 @@ function Scroll() {
 
     useEffect(() => {
         if (scrollHeight === document.body.scrollHeight - window.innerHeight) {
+            console.log(icons);
             fetchData();
         }
     }, [scrollHeight]);
