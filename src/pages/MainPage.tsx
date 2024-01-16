@@ -15,6 +15,16 @@ function App() {
                             🖱️
                         </span>
                     </Link>
+                    <Link className="TextLink" to={"/three"}>
+                        <span role="icon" aria-label="three">
+                            💎
+                        </span>
+                    </Link>
+                    <Link className="TextLink" to={"/universe"}>
+                        <span role="icon" aria-label="universe">
+                            🌌
+                        </span>
+                    </Link>
                 </div>
             </div>
         </>
