@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import * as THREE from "three";
 
@@ -40,6 +40,11 @@ function Scroll() {
     // 화면이 새로고침 될 때마다 렌더링
     function animate() {
         requestAnimationFrame(animate);
+
+        // 큐브 회전시키기
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+
         renderer.render(scene, camera);
     }
 

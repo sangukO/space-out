@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import * as THREE from "three";
+// import * as THREE from "three";
 
 function Scroll() {
-    const scene = new THREE.Scene();
+    // const scene = new THREE.Scene();
 
     return (
         <>
